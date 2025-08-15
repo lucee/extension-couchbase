@@ -12,4 +12,4 @@ Require-Bundle: org.mongodb.bson;bundle-version="[4.2.3,5)",
  com.fasterxml.jackson.dataformat.jackson-dataformat-cbor,
  bouncycastle.prov;bundle-version="[1.38.0,2)",
  bouncycastle.tsp;bundle-version="[1.38.0,2)",
- bouncycastle.mail;bundle-version="[1.38.0,2)",
+ bouncycastle.mail;bundle-version="[1.38.0,2)"
