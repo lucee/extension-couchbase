@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Export-Package: lucee.extension.io.cache.redis,
+ lucee.extension.io.cache.redis.simple,
+ lucee.extension.io.cache.redis.udf
+Bundle-ManifestVersion: 2
+Require-Bundle: org.mongodb.bson;bundle-version="[4.2.3,5)",
+ org.lucee.core-io;bundle-version="[2.4.7,3)",
+ org.lucee.java-client;bundle-version="[3.4.7,4)",
+ com.fasterxml.jackson.core.jackson-annotations,
+ com.fasterxml.jackson.core.jackson-core,
+ com.fasterxml.jackson.core.jackson-databind,
+ com.fasterxml.jackson.dataformat.jackson-dataformat-cbor

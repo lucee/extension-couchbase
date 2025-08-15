@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project default="clean" basedir="." name="couchbase-extension">
+	<description>Build Couchbase Extension</description>
+
+
+
+  <property name="lib" location="source/java/lib"/>
+  <property name="src" location="source/java/src"/>
+  <property name="srcImg" location="source/images"/>
+  <property name="temp" location="temp"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="target"/>
+
+  <property name="tld" location="source/tld"/>
+  <property name="fld" location="source/fld"/>
+  
+
+
+
+  
+	<import file="build-compile.xml"/>
+
+	<target name="dist" depends="compile" description="copy source file to temp" >
+
+
+		<!-- Manifest of the extension -->
+		<echo file="${dist}/extension2/META-INF/MANIFEST.MF">Manifest-Version: 1.0
+Built-Date: ${NOW}
+version: "${bundleversion}"
+id: "${id}"
+name: "${label}"
+description: "${description}"
+start-bundles: false
+release-type: ${releaseType}
+cache: "[{'class':'${class}','bundleName':'${bundlename}','bundleVersion':'${bundleversion}'}]"
+</echo>
+
+
+		<!-- copy the jars necessary -->
+		<copy todir="${dist}/extension2/jars">
+			<fileset dir="${lib}">
+				<include name="**/*.jar"/>
+				<exclude name="**/javax.servlet.jar"/>
+				<exclude name="**/lucee*.jar"/>
+			</fileset>
+		</copy>
+
+		<!-- copy the logo -->
+    <copy todir="${dist}/extension2/META-INF">
+      <fileset dir="${srcImg}/">
+        <include name="logo.png"/>
+      </fileset>
+    </copy>
+
+		<!-- copy the jar just build -->
+		<copy todir="${dist}/extension2/jars">
+			<fileset dir="${temp}/jars/">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+		
+
+	<!-- copy the tlds necessary -->
+    <copy 
+      file="${build}/context/admin/cdriver/${camelname}.cfc" 
+      tofile="${dist}/extension2/context/admin/cdriver/${camelname}.cfc" />
+
+    <replaceregexp 
+      file="${dist}/extension2/context/admin/cdriver/${camelname}.cfc" 
+      match="\{class\}" 
+      replace="${class}" 
+      byline="true"/>
+    <replaceregexp 
+      file="${dist}/extension2/context/admin/cdriver/${camelname}.cfc" 
+      match="\{label\}" 
+      replace="${label}" 
+      byline="true"/>
+    <replaceregexp 
+      file="${dist}/extension2/context/admin/cdriver/${camelname}.cfc" 
+      match="\{desc\}" 
+      replace="${description}" 
+      byline="true"/>
+    
+		<!-- Zip everything  -->
+		<zip destfile="${dist}/${filename}-${bundleversion}.lex">
+				<zipfileset dir="${dist}/extension2"/>
+		</zip>
+
+	</target>
+
+	<target name="clean"  depends="dist" description="clean up" >
+		<delete dir="${temp}"/>
+		<delete dir="${dist}/extension2"/>
+	</target>
+
+
+
+</project>
