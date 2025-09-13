@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.lucee</groupId>
     <artifactId>couchbase-extension</artifactId>
-    <version>1.0.0.36-SNAPSHOT</version>
+    <version>1.0.0.36-RC</version>
     <packaging>pom</packaging>
     <name>Couchbase Extension</name>
 
